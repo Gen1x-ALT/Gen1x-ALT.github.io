@@ -31,6 +31,9 @@
             </td>
             <td valign="top" width="94%" height="100%" style="border: solid; border-size: 2px;" id="me">
                <h3>
+                  <font size="5" color="#CC33FF" id="birthday" hidden>Happy 
+					birthday to meeeee!!!!!! (It&#39;s March 16th on Argentina)</font></h3>
+				<h3>
                   <u>
                   <font size="5">Welcome to... me i guess</font>
                   </u>
@@ -44,7 +47,7 @@
                </p>
                <hr>
                <p>I&#39;m G1nX, Gen1x or Genaro_01 online, and I don&#39;t go by any other usernames in most platforms.</p>
-               <p>I live in Argentina, a spanish-speaking country in South America <i>(I won&#39;t tell you anything else related to where I live)</i>. </p>
+               <p>I live in Argentina, a spanish-speaking country in South America. My birthday is on March 16th.</p>
                <p>I currently live in the city of Mar Del Plata <i>(I think this is way too much info, but I&#39;ll add it anyways)</i>. </p>
                <p>&nbsp;</p>
                <p>I code in my free time. I&#39;m in love with old internet websites, so I made this whole thing with Microsoft FrontPage 2003.</p>
@@ -127,6 +130,15 @@
                            <script>
                               document.addEventListener('DOMContentLoaded', function() {
                                 function updateCurrentTime() {
+                                  const birthDay = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Argentina/Buenos_Aires', day: 'numeric' }).format(new Date());
+                                  const birthMonth = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Argentina/Buenos_Aires', month: 'numeric' }).format(new Date()) % 12 + 1;
+                                  
+                                  if (birthDay == 16 && birthMonth == 3) {
+                                     document.getElementById("birthday").setAttribute("hidden", false);
+                                  } else {
+                                     document.getElementById("birthday").setAttribute("hidden", true);
+                                  }
+
                                   // Get the current UTC time
                                   const currentUTC = new Date();
                                   // Calculate the time in UTC-3 (America/Argentina/Buenos_Aires)
@@ -329,7 +341,7 @@
          <i>
             <small>
                This site was last updated
-               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-feb.-2024 04:59:50<!--webbot bot="Timestamp" i-checksum="29754" endspan -->
+               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-feb.-2024 05:44:46<!--webbot bot="Timestamp" i-checksum="29895" endspan -->
             </small>
          </i>
       </p>
