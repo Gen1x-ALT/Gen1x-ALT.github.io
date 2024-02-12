@@ -1,0 +1,83 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta http-equiv="Content-Language" content="en-us">
+      <title>Projects and stuff</title>
+      <link rel="stylesheet" href="styles.css">
+      <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+   </head>
+   <body>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" height="141">
+         <tr class="header">
+            <td align="center" height="124">
+               <font size="6">Projects and stuff</font>
+            </td>
+         </tr>
+      </table>
+      <br>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" bordercolorlight="#FFFFFF" bordercolordark="#000000">
+         <tr>
+            <td valign="top" width="217" style="border: none;">
+               <b>
+               <!--webbot bot="Navigation" s-orientation="vertical" s-rendering="graphics" s-type="top" b-include-home="TRUE" b-include-up="TRUE" startspan --><nobr><a href="index.htm" target="">Home</a></nobr><br> <nobr>Projects&nbsp;and&nbsp;stuff</nobr><!--webbot bot="Navigation" i-checksum="21494" endspan -->
+               </b>
+               <p>
+                  <b>
+                  <object classid="clsid:D27CDB6E-AE6D-11CF-96B8-444553540000" id="intro" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0" border="0" width="217" height="217">
+                     <param name="movie" value="flash/intro.swf">
+                     <param name="quality" value="High">
+                     <param name="loop" value="false">
+                     <param name="play" value="false">
+                     <embed src="flash/intro.swf" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" name="intro" width="217" height="217" quality="High" loop="false" play="false">
+                  </object>
+               	</b>
+               </p>
+            </td>
+            <td valign="top" width="94%" height="100%" style="border: solid; border-size: 2px;" id="me">
+            <center>
+                <p id="label">Loading everything...</p>
+                <table id="projectsTable" border="1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>URL</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </td>
+           <p class="center-align">This project list is automatically updated.</p>
+           </center>
+        </tr>
+      </table>
+      <p class="center-align">
+         <i>
+            <small>
+               This site was last updated
+               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-feb.-2024 04:08:54<!--webbot bot="Timestamp" i-checksum="29811" endspan -->
+            </small>
+         </i>
+      </p>
+      <script>
+        // Fetch data from the JSON file
+        fetch('https://gen1x-alt.github.io/my-website/stuff.json')
+            .then(response => response.json())
+            .then(data => {
+                // Populate the table dynamically
+                const tableBody = document.querySelector('#projectsTable tbody');
+                data.forEach(project => {
+                    const row = document.createElement('tr');
+                    document.getElementById("label").setAttribute("hidden", true);
+                    row.innerHTML = `
+                        <td>${project.name}</td>
+                        <td>${project.description}</td>
+                        <td><a href="${project.url}" target="_blank"><button class="cool-button">Click to see</button></a></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+   </body>
+</html>
