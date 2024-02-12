@@ -48,7 +48,6 @@
                <hr>
                <p>I&#39;m G1nX, Gen1x or Genaro_01 online, and I don&#39;t go by any other usernames in most platforms.</p>
                <p>I live in Argentina, a spanish-speaking country in South America. My birthday is on March 16th.</p>
-               <p>I currently live in the city of Mar Del Plata <i>(I think this is way too much info, but I&#39;ll add it anyways)</i>. </p>
                <p>&nbsp;</p>
                <p>I code in my free time. I&#39;m in love with old internet websites, so I made this whole thing with Microsoft FrontPage 2003.</p>
                <p>&nbsp;</p>
@@ -182,75 +181,12 @@
                            </script>
                            <!--webbot bot="HTMLMarkup" endspan -->
                            <p id="currentTime">Loading...</p>
-                           <hr>
-                           <p id="weather">Also loading...</p>
-                           <script>
-                              const getWeatherDescription = (code) => {
-                              const weatherCodes = [
-                              { code: 0, description: 'Clear sky' },
-                              { code: 1, description: 'Mainly clear' },
-                              { code: 2, description: 'Partly cloudy' },
-                              { code: 3, description: 'Overcast' },
-                              { code: 45, description: 'Fog and depositing rime fog' },
-                              { code: 48, description: 'Fog and depositing rime fog' },
-                              { code: 51, description: 'Drizzle: Light intensity' },
-                              { code: 53, description: 'Drizzle: Moderate intensity' },
-                              { code: 55, description: 'Drizzle: Dense intensity' },
-                              { code: 56, description: 'Freezing Drizzle: Light intensity' },
-                              { code: 57, description: 'Freezing Drizzle: Dense intensity' },
-                              { code: 61, description: 'Rain: Slight intensity' },
-                              { code: 63, description: 'Rain: Moderate intensity' },
-                              { code: 65, description: 'Rain: Heavy intensity' },
-                              { code: 66, description: 'Freezing Rain: Light intensity' },
-                              { code: 67, description: 'Freezing Rain: Heavy intensity' },
-                              { code: 71, description: 'Snow fall: Slight intensity' },
-                              { code: 73, description: 'Snow fall: Moderate intensity' },
-                              { code: 75, description: 'Snow fall: Heavy intensity' },
-                              { code: 77, description: 'Snow grains' },
-                              { code: 80, description: 'Rain showers: Slight intensity' },
-                              { code: 81, description: 'Rain showers: Moderate intensity' },
-                              { code: 82, description: 'Rain showers: Violent intensity' },
-                              { code: 85, description: 'Snow showers: Slight intensity' },
-                              { code: 86, description: 'Snow showers: Heavy intensity' },
-                              { code: 95, description: 'Thunderstorm: Slight or moderate' },
-                              { code: 96, description: 'Thunderstorm with slight hail' },
-                              { code: 99, description: 'Thunderstorm with heavy hail' }
-                              ];
-                              
-                              const matchingWeather = weatherCodes.find(weather => weather.code === code);
-                              
-                              return matchingWeather ? matchingWeather.description : 'Unknown weather code';
-                              };
-                              
-                              document.addEventListener('DOMContentLoaded', function() {
-                                // hello there, if you're trying to doxx me, the coords
-                                // used below are NOT the exact coordinates from where I live.
-                                // those are the general coordinates for mar del plata.
-                                // get dunked on, doxxers!
-                                fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0004&longitude=-57.5562&current=temperature_2m,is_day,weather_code&timezone=auto').then(response => response.json()).then(data => updateWeather(data.current));
-                              });
-                              
-                              function updateWeather(weatherData) {
-                                const weatherElement = document.getElementById('weather');
-                                if (weatherData) {
-                                  const temperature = weatherData.temperature_2m;
-                                  const isDay = weatherData.is_day === 1 ? 'day-time' : 'night-time';
-                                  const weatherCode = weatherData.weather_code;
-                                  const weatherText = `<h2><u>Weather in Mar del Plata</u></h2>Temperature: <b>${temperature}</b>°C<br>It's <b>${isDay}</b> right now<br>Weather Description: <b>${getWeatherDescription(weatherCode)}</b>`;
-                              
-                                  weatherElement.innerHTML = weatherText;
-                                } else {
-                                  weatherElement.innerHTML = 'Failed to fetch weather data';
-                                }
-                              }
-                           </script>
-                        </td>
+                           </td>
                      </tr>
                      <tr>
                         <td width="47%" align="left" valign="top" style="border-left-style:none; border-left-width:medium; border-right-style:none; border-right-width:medium; border-top-style:solid; border-top-width:1; border-bottom-style:none; border-bottom-width:medium" height="41">
                            <h3>
-                              <u>
-                              <font size="5">More about me (idk how you can be THIS interested on me)</font></u></h3>
+                              <u><font size="5">My tastes</font></u></h3>
                         </td>
                         <td width="51%" align="left" valign="top" style="border-right-style:none; border-right-width:medium; border-top-style:solid; border-top-width:1; border-bottom-style:none; border-bottom-width:medium" height="41">
                            <h3>
@@ -301,9 +237,8 @@
                            </ul>
                            <p>I can&#39;t remember much more right now, sorry...</p>
                            <hr>
-                           <p>I really don&#39;t like sharing too much data with strangers, other than very simple stuff.</p>
-                           <p>If you really wanna know more, I have autism and ADHD.</p>
-                           <p>That&#39;s it, I&#39;ll share no more data!
+                           <p>I really don&#39;t like sharing too much data with strangers, other than very simple stuff 
+							such as tastes and overall personality...</p>
                         </td>
                         <td width="51%" align="left" valign="top" style="border-right-style:none; border-right-width:medium; border-top-style:none; border-top-width:medium; border-bottom-style:none; border-bottom-width:medium" height="36">
                            Some websites you can find me and contact me in 
@@ -341,7 +276,7 @@
          <i>
             <small>
                This site was last updated
-               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-feb.-2024 05:44:46<!--webbot bot="Timestamp" i-checksum="29895" endspan -->
+               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-feb.-2024 15:07:32<!--webbot bot="Timestamp" i-checksum="29857" endspan -->
             </small>
          </i>
       </p>
