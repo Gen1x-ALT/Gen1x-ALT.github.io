@@ -13,5 +13,10 @@
     "name": "Vetero | Terminal edition",
     "url": "https://www.npmjs.com/package/vetero-cmd/",
     "description": "Weather data, with spice, but in the terminal. (requires node.js and npm)"
+  },
+  {
+    "name": "PenguinNews 2.0.2",
+    "url": "https://gen1x.is-a.dev/PenguinNews/",
+    "description": "Using the power of AI, fetch the local news."
   }
 ]
