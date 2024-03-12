@@ -142,7 +142,7 @@ function FrontPage_Form1_Validator(theForm)
          <i>
             <small>
                This site was last updated
-               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-mar.-2024 13:57:29<!--webbot bot="Timestamp" i-checksum="30342" endspan -->
+               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-mar.-2024 14:01:16<!--webbot bot="Timestamp" i-checksum="30333" endspan -->
             </small>
          </i>
       </p>
@@ -251,6 +251,7 @@ function FrontPage_Form1_Validator(theForm)
     
     function load() {
         commentsContainer.innerHTML = '<img src="images/loading.gif">';
+        document.getElementById('pages').innerHTML = "";
         fetchstuff();
     }
     
