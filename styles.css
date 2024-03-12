@@ -32,12 +32,21 @@ b, font {
   font-family: 'ComicSans';
 }
 
+#discus-div {
+  color: white;
+  background-image: url(inner_table_bg.gif);
+}
+
 i {
   font-family: 'ComicItalic', sans-serif;
 }
 
 .bold-n-italic {
   font-family: 'ComicMix', sans-serif;
+}
+
+p {
+  font-size: medium;
 }
 
 body {
