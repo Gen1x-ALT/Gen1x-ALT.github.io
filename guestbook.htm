@@ -140,7 +140,7 @@ function FrontPage_Form1_Validator(theForm)
          <i>
             <small>
                This site was last updated
-               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-mar.-2024 12:54:34<!--webbot bot="Timestamp" i-checksum="30200" endspan -->
+               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-mar.-2024 13:03:05<!--webbot bot="Timestamp" i-checksum="30249" endspan -->
             </small>
          </i>
       </p>
@@ -160,6 +160,8 @@ function FrontPage_Form1_Validator(theForm)
 
             // Sort comments by timestamp in descending order
             data.sort((a, b) => b.timestamp - a.timestamp);
+            
+            commentsContainer.innerHTML = "";
 
             data.forEach(comment => {
                 // Convert timestamp to local time
@@ -174,7 +176,7 @@ function FrontPage_Form1_Validator(theForm)
                 const sanitizedId = DOMPurify.sanitize(comment.id.toString());
                 if (!sanitizedComment || !sanitizedUsername || !sanitizedId) {
                     return;
-                }
+                }   
                 commentDiv.innerHTML = `
                     <p><i>ID: ${sanitizedId}</i></p><p><strong>${sanitizedUsername}:</strong> ${sanitizedComment}</p>
                     <p><small>${localTime}</small></p><br>
