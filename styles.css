@@ -28,11 +28,8 @@ b, font {
 }
 
 #disqus_thread, .alert--error {
-  background-image: url(inner_table_bg.gif);
   color: white;
   font-family: 'ComicSans';
-  border: solid;
-  border-size: 3px;
 }
 
 i {
