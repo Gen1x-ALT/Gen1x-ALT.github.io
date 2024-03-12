@@ -127,9 +127,11 @@ function FrontPage_Form1_Validator(theForm)
                      </p>
                   </form>
                   <hr>
+                  <br>
                   <h3 id="commentstitle"><u><font size="5">Comments:</font></u></h3>
                   <div id="commentsContainer"><img src="images/loading.gif"></div>
                   <hr>
+                  <button onclick="load()">Refresh</button><br>
                   <p>Pages</p>
                   <div id="pages"></div>
                </center>
@@ -140,77 +142,119 @@ function FrontPage_Form1_Validator(theForm)
          <i>
             <small>
                This site was last updated
-               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-mar.-2024 13:03:05<!--webbot bot="Timestamp" i-checksum="30249" endspan -->
+               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-mar.-2024 13:57:29<!--webbot bot="Timestamp" i-checksum="30342" endspan -->
             </small>
          </i>
       </p>
       <script>
-        // Fetch data from the JSON file
+    // Fetch data from the JSON file
     const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
 
-    fetch(`https://corsproxy.org/?https%3A%2F%2Fmany-things.hstn.me%2Fgbook%2Fentries.php%3Fpage%3D=${currentPage}`)
-        .then(response => response.json())
-        .then(data => {
-            // Display comments in a div
-            const commentsContainer = document.getElementById('commentsContainer');
-            const pagesContainer = document.getElementById('pages');
+    function fetchstuff() {
+        // Fetch data from the JSON file
+        const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
 
-            data = data.comments;
-            const maxPages = data.maxPages || 1;
+        fetch(`https://corsproxy.org/?https%3A%2F%2Fmany-things.hstn.me%2Fgbook%2Fentries.php%3Fpage%3D=${currentPage}`)
+            .then(response => response.json())
+            .then(data => {
+                // Display comments in a div
+                const commentsContainer = document.getElementById('commentsContainer');
+                const pagesContainer = document.getElementById('pages');
 
-            // Sort comments by timestamp in descending order
-            data.sort((a, b) => b.timestamp - a.timestamp);
-            
-            commentsContainer.innerHTML = "";
+                data = data.comments;
+                const maxPages = data.maxPages || 1;
 
-            data.forEach(comment => {
-                // Convert timestamp to local time
-                const timestamp = new Date(comment.timestamp * 1000);
-                const localTime = timestamp.toLocaleString();
+                // Sort comments by timestamp in descending order
+                data.sort((a, b) => b.timestamp - a.timestamp);
 
-                const commentDiv = document.createElement('div');
-                commentDiv.id = "id-" + comment.id;
-                // Sanitize comment content using DOMPurify
-                const sanitizedComment = DOMPurify.sanitize(comment.comment);
-                const sanitizedUsername = DOMPurify.sanitize(comment.username);
-                const sanitizedId = DOMPurify.sanitize(comment.id.toString());
-                if (!sanitizedComment || !sanitizedUsername || !sanitizedId) {
-                    return;
-                }   
-                commentDiv.innerHTML = `
-                    <p><i>ID: ${sanitizedId}</i></p><p><strong>${sanitizedUsername}:</strong> ${sanitizedComment}</p>
-                    <p><small>${localTime}</small></p><br>
-                `;
-                commentsContainer.appendChild(commentDiv);
-            });
+                commentsContainer.innerHTML = "";
 
-            // Add basic pages navigation
-            for (let i = 1; i <= maxPages; i++) {
-                const pageLink = document.createElement('a');
-                pageLink.href = `?page=${i}`;
-                pageLink.innerText = i;
-                if (i == currentPage) {
-                    pageLink.style.fontWeight = 'bold';
+                data.forEach(comment => {
+                    // Convert timestamp to local time
+                    const timestamp = new Date(comment.timestamp * 1000);
+                    const localTime = timestamp.toLocaleString();
+
+                    const commentDiv = document.createElement('div');
+                    commentDiv.id = "id-" + comment.id;
+                    // Sanitize comment content using DOMPurify
+                    const sanitizedComment = DOMPurify.sanitize(comment.comment, {
+                        ALLOWED_TAGS: ['i', 'b', 'u'],
+                    });
+                    const sanitizedUsername = DOMPurify.sanitize(comment.username, {
+                        ALLOWED_TAGS: [],
+                    });
+                    const sanitizedId = DOMPurify.sanitize(comment.id.toString(), {
+                        ALLOWED_TAGS: [],
+                    });
+                    if (!sanitizedComment || !sanitizedUsername || !sanitizedId) {
+                        return;
+                    }
+                                        
+                    commentDiv.style.cursor = "pointer";
+                    
+                    commentDiv.innerHTML = `
+                        <p><i>ID: ${sanitizedId}</i></p><p><strong>${sanitizedUsername}:</strong> ${sanitizedComment}</p>
+                        <p><small>${localTime}</small></p><br>
+                    `;
+                    commentsContainer.appendChild(commentDiv);
+                    
+                    commentDiv.addEventListener('click', function (event) {
+                        const username = sanitizedUsername;
+                        const commentId = sanitizedId;
+
+                        // Update the comment input field with the selected username and commentId
+                        const commentInput = document.getElementById('comment');
+                        commentInput.value = `<i>responding to @${username}-${commentId}</i> | `;
+                    });
+                });
+
+                // Add basic pages navigation
+                if (currentPage > 1) {
+                    const prevPageLink = document.createElement('a');
+                    prevPageLink.href = `?page=${currentPage - 1}`;
+                    prevPageLink.innerText = '<';
+                    pagesContainer.appendChild(prevPageLink);
                 }
-                pagesContainer.appendChild(pageLink);
+                for (let i = 1; i <= maxPages; i++) {
+                    const pageLink = document.createElement('a');
+                    pageLink.href = `?page=${i}`;
+                    pageLink.innerText = i;
+                    if (i == currentPage) {
+                        pageLink.style.fontWeight = 'bold';
+                    }
+                    pagesContainer.appendChild(pageLink);
 
-                if (i < maxPages) {
-                    pagesContainer.appendChild(document.createTextNode(' | '));
+                    if (i < maxPages) {
+                        pagesContainer.appendChild(document.createTextNode(' | '));
+                    }
                 }
-            }
+                if (currentPage < maxPages) {
+                    const nextPageLink = document.createElement('a');
+                    nextPageLink.href = `?page=${currentPage + 1}`;
+                    nextPageLink.innerText = '>';
+                    pagesContainer.appendChild(nextPageLink);
+                }
 
-            // Check if "id" parameter is present in the URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const commentId = urlParams.get('id');
-            if (commentId) {
-                const targetComment = document.getElementById('id-' + commentId);
-                if (targetComment) {
-                    // Scroll to the specified comment
-                    targetComment.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Check if "id" parameter is present in the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const commentId = urlParams.get('id');
+                if (commentId) {
+                    const targetComment = document.getElementById('id-' + commentId);
+                    if (targetComment) {
+                        // Scroll to the specified comment
+                        targetComment.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 }
-            }
-        })
-        .catch(error => console.error('Error fetching data:', error));
-      </script>
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+    
+    function load() {
+        commentsContainer.innerHTML = '<img src="images/loading.gif">';
+        fetchstuff();
+    }
+    
+    fetchstuff();
+</script>
    </body>
 </html>
