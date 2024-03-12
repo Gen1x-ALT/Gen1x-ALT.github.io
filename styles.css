@@ -27,6 +27,14 @@ b, font {
   letter-spacing: 0.2px;
 }
 
+#disqus_thread, .alert--error {
+  background-image: url(inner_table_bg.gif);
+  color: white;
+  font-family: 'ComicSans';
+  border: solid;
+  border-size: 3px;
+}
+
 i {
   font-family: 'ComicItalic', sans-serif;
 }

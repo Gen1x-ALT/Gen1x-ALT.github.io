@@ -78,62 +78,24 @@
             </td>
             <td valign="top" width="94%" height="100%" style="border: solid; border-size: 2px;" id="me">
                <center>
-                  
-                  <h3><font size="5">Cool guestbook </font>
-					<img border="0" src="images/new.gif" width="40" height="30"></h3>
-                  
-                  <!--webbot BOT="GeneratedScript" PREVIEW=" " startspan --><script Language="JavaScript" Type="text/javascript"><!--
-function FrontPage_Form1_Validator(theForm)
-{
-
-  if (theForm.username.value == "")
-  {
-    alert("Please enter a value for the \"username\" field.");
-    theForm.username.focus();
-    return (false);
-  }
-
-  if (theForm.username.value.length > 8)
-  {
-    alert("Please enter at most 8 characters in the \"username\" field.");
-    theForm.username.focus();
-    return (false);
-  }
-
-  if (theForm.comment.value == "")
-  {
-    alert("Please enter a value for the \"comment\" field.");
-    theForm.comment.focus();
-    return (false);
-  }
-
-  if (theForm.comment.value.length > 150)
-  {
-    alert("Please enter at most 150 characters in the \"comment\" field.");
-    theForm.comment.focus();
-    return (false);
-  }
-  return (true);
-}
-//--></script><!--webbot BOT="GeneratedScript" endspan --><form method="POST" action="https://corsproxy.org/?https%3A%2F%2Fmany-things.hstn.me%2Fgbook%2Fnew_entry.php" onsubmit="return FrontPage_Form1_Validator(this)" language="JavaScript" name="FrontPage_Form1">
-                     <label for="username">Username:</label>
-                     <p>
-                        &nbsp;<!--webbot bot="Validation" b-value-required="TRUE" i-maximum-length="8" --><input type="text" id="username" name="username" required size="25" maxlength="8"><br><br>
-                        <label for="comment">Comment:</label> 
-                     </p>
-                     <p>
-                        &nbsp;<!--webbot bot="Validation" b-value-required="TRUE" i-maximum-length="150" --><textarea id="comment" name="comment" required rows="8" cols="28"></textarea><br><br>
-                        <input type="submit" value="Submit">
-                     </p>
-                  </form>
-                  <hr>
-                  <br>
-                  <h3 id="commentstitle"><u><font size="5">Comments:</font></u></h3>
-                  <div id="commentsContainer"><img src="images/loading.gif"></div>
-                  <hr>
-                  <button onclick="load()">Refresh</button><br>
-                  <p>Pages</p>
-                  <div id="pages"></div>
+                 <div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    
+    var disqus_config = function () {
+    this.page.identifier = "guestbook"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://gen1x-personal.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                </center>
             </td>
          </tr>
@@ -142,120 +104,9 @@ function FrontPage_Form1_Validator(theForm)
          <i>
             <small>
                This site was last updated
-               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-mar.-2024 14:01:16<!--webbot bot="Timestamp" i-checksum="30333" endspan -->
+               <!--webbot bot="Timestamp" s-type="EDITED" s-format="%d-%b-%Y %H:%M:%S" startspan -->12-mar.-2024 15:31:10<!--webbot bot="Timestamp" i-checksum="30304" endspan -->
             </small>
          </i>
       </p>
-      <script>
-    // Fetch data from the JSON file
-    const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
-
-    function fetchstuff() {
-        // Fetch data from the JSON file
-        const currentPage = new URLSearchParams(window.location.search).get('page') || 1;
-
-        fetch(`https://corsproxy.org/?https%3A%2F%2Fmany-things.hstn.me%2Fgbook%2Fentries.php%3Fpage%3D=${currentPage}`)
-            .then(response => response.json())
-            .then(data => {
-                // Display comments in a div
-                const commentsContainer = document.getElementById('commentsContainer');
-                const pagesContainer = document.getElementById('pages');
-
-                data = data.comments;
-                const maxPages = data.maxPages || 1;
-
-                // Sort comments by timestamp in descending order
-                data.sort((a, b) => b.timestamp - a.timestamp);
-
-                commentsContainer.innerHTML = "";
-
-                data.forEach(comment => {
-                    // Convert timestamp to local time
-                    const timestamp = new Date(comment.timestamp * 1000);
-                    const localTime = timestamp.toLocaleString();
-
-                    const commentDiv = document.createElement('div');
-                    commentDiv.id = "id-" + comment.id;
-                    // Sanitize comment content using DOMPurify
-                    const sanitizedComment = DOMPurify.sanitize(comment.comment, {
-                        ALLOWED_TAGS: ['i', 'b', 'u'],
-                    });
-                    const sanitizedUsername = DOMPurify.sanitize(comment.username, {
-                        ALLOWED_TAGS: [],
-                    });
-                    const sanitizedId = DOMPurify.sanitize(comment.id.toString(), {
-                        ALLOWED_TAGS: [],
-                    });
-                    if (!sanitizedComment || !sanitizedUsername || !sanitizedId) {
-                        return;
-                    }
-                                        
-                    commentDiv.style.cursor = "pointer";
-                    
-                    commentDiv.innerHTML = `
-                        <p><i>ID: ${sanitizedId}</i></p><p><strong>${sanitizedUsername}:</strong> ${sanitizedComment}</p>
-                        <p><small>${localTime}</small></p><br>
-                    `;
-                    commentsContainer.appendChild(commentDiv);
-                    
-                    commentDiv.addEventListener('click', function (event) {
-                        const username = sanitizedUsername;
-                        const commentId = sanitizedId;
-
-                        // Update the comment input field with the selected username and commentId
-                        const commentInput = document.getElementById('comment');
-                        commentInput.value = `<i>responding to @${username}-${commentId}</i> | `;
-                    });
-                });
-
-                // Add basic pages navigation
-                if (currentPage > 1) {
-                    const prevPageLink = document.createElement('a');
-                    prevPageLink.href = `?page=${currentPage - 1}`;
-                    prevPageLink.innerText = '<';
-                    pagesContainer.appendChild(prevPageLink);
-                }
-                for (let i = 1; i <= maxPages; i++) {
-                    const pageLink = document.createElement('a');
-                    pageLink.href = `?page=${i}`;
-                    pageLink.innerText = i;
-                    if (i == currentPage) {
-                        pageLink.style.fontWeight = 'bold';
-                    }
-                    pagesContainer.appendChild(pageLink);
-
-                    if (i < maxPages) {
-                        pagesContainer.appendChild(document.createTextNode(' | '));
-                    }
-                }
-                if (currentPage < maxPages) {
-                    const nextPageLink = document.createElement('a');
-                    nextPageLink.href = `?page=${currentPage + 1}`;
-                    nextPageLink.innerText = '>';
-                    pagesContainer.appendChild(nextPageLink);
-                }
-
-                // Check if "id" parameter is present in the URL
-                const urlParams = new URLSearchParams(window.location.search);
-                const commentId = urlParams.get('id');
-                if (commentId) {
-                    const targetComment = document.getElementById('id-' + commentId);
-                    if (targetComment) {
-                        // Scroll to the specified comment
-                        targetComment.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    }
-    
-    function load() {
-        commentsContainer.innerHTML = '<img src="images/loading.gif">';
-        document.getElementById('pages').innerHTML = "";
-        fetchstuff();
-    }
-    
-    fetchstuff();
-</script>
-   </body>
+        </body>
 </html>
