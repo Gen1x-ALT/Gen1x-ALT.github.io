@@ -67,9 +67,12 @@ body {
 
 .header {
   background-color: #003366; /* Dark blue header */
+  border: 1px solid #dddddd;
   padding: 10px;
   /* text-align: center; */
   width: 100%;
+  border-left: none;
+  border-right: none;
 }
 
 .cool-button {
