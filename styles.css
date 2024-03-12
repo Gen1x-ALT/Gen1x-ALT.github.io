@@ -120,7 +120,7 @@ a {
   color: coral;
 }
 
-#me {
+#me, .me {
   background-color: #3d3b3b;
   /* padding: 10px; */
   border: solid;
