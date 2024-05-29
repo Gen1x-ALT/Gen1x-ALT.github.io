@@ -1,1 +1,26 @@
-{}
+{
+    "fileBrowser": {
+        "files": [
+            {
+                "type": "folder",
+                "name": "Documents",
+                "icon": "folder.svg"
+            },
+            {
+                "type": "folder",
+                "name": "Photos",
+                "icon": "folder.svg"
+            },
+            {
+                "type": "file",
+                "name": "resume.pdf",
+                "icon": "file.svg"
+            },
+            {
+                "type": "file",
+                "name": "project.zip",
+                "icon": "file.svg"
+            }
+        ]
+    }
+}
